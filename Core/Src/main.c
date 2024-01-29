@@ -332,7 +332,8 @@ void StartDefaultTask(void *argument)
   for(;;)
   {
     HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
-    vTaskDelay( 200 / portTICK_RATE_MS );
+    HAL_UART_Transmit(&huart2, "Hello World!\n", 13, 1000);
+    vTaskDelay( 500 / portTICK_RATE_MS );
   }
 
   vTaskDelete(NULL);

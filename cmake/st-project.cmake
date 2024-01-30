@@ -117,6 +117,8 @@ target_sources(
     "Drivers\\STM32L4xx_HAL_Driver\\Src\\stm32l4xx_hal_uart_ex.c"
     "Drivers\\STM32L4xx_HAL_Driver\\Src\\stm32l4xx_hal_uart.c"
     "Drivers\\STM32L4xx_HAL_Driver\\Src\\stm32l4xx_hal.c"
+    "ST7735\\Src\\fonts.c"
+    "ST7735\\Src\\st7735.c"
 )
 
 add_custom_command(

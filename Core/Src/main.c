@@ -88,7 +88,7 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-
+  ST7735_Init();
   /* USER CODE END Init */
 
   /* Configure the system clock */

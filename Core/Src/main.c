@@ -343,7 +343,14 @@ void StartDefaultTask(void *argument)
   {
     HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
     HAL_UART_Transmit(&huart2, "Hello World!\n", 13, 1000);
-    vTaskDelay( 500 / portTICK_RATE_MS );
+
+    // Check fonts
+    ST7735_FillScreen(ST7735_WHITE);
+    ST7735_WriteString(0, 0, "POWER-CONDITIONER", Font_7x10, ST7735_RED, ST7735_BLACK);
+    ST7735_WriteString(0, 3*10, "DEMO", Font_11x18, ST7735_GREEN, ST7735_BLACK);
+    ST7735_WriteString(0, 3*10+3*18, ":)", Font_16x26, ST7735_BLUE, ST7735_BLACK);
+
+    vTaskDelay( 2000 / portTICK_RATE_MS );
   }
 
   vTaskDelete(NULL);

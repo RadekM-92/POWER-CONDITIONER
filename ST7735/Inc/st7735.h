@@ -13,7 +13,7 @@
 #define ST7735_MADCTL_MH  0x04
 
 /*** Redefine if necessary ***/
-#define ST7735_SPI_PORT hspi1
+#define ST7735_SPI_PORT hspi2
 extern SPI_HandleTypeDef ST7735_SPI_PORT;
 
 #define ST7735_RES_Pin       GPIO_PIN_10

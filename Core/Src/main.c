@@ -32,6 +32,21 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+uint32_t SinusValues[128] ={
+   2048U, 2145U, 2242U, 2339U, 2435U, 2530U, 2624U, 2717U, 2808U, 2897U,
+   2984U, 3069U, 3151U, 3230U, 3307U, 3381U, 3451U, 3518U, 3581U, 3640U,
+   3696U, 3748U, 3795U, 3838U, 3877U, 3911U, 3941U, 3966U, 3986U, 4002U,
+   4013U, 4019U, 4020U, 4016U, 4008U, 3995U, 3977U, 3954U, 3926U, 3894U,
+   3858U, 3817U, 3772U, 3722U, 3669U, 3611U, 3550U, 3485U, 3416U, 3344U,
+   3269U, 3191U, 3110U, 3027U, 2941U, 2853U, 2763U, 2671U, 2578U, 2483U,
+   2387U, 2291U, 2194U, 2096U, 1999U, 1901U, 1804U, 1708U, 1612U, 1517U,
+   1424U, 1332U, 1242U, 1154U, 1068U, 985U, 904U, 826U, 751U, 679U,
+   610U, 545U, 484U, 426U, 373U, 323U, 278U, 237U, 201U, 169U,
+   141U, 118U, 100U, 87U, 79U, 75U, 76U, 82U, 93U, 109U,
+   129U, 154U, 184U, 218U, 257U, 300U, 347U, 399U, 455U, 514U,
+   577U, 644U, 714U, 788U, 865U, 944U, 1026U, 1111U, 1198U, 1287U,
+   1378U, 1471U, 1565U, 1660U, 1756U, 1853U, 1950U, 2047
+};
 
 /* USER CODE END PD */
 
@@ -115,6 +130,8 @@ int main(void)
   MX_TIM6_Init();
   /* USER CODE BEGIN 2 */
   ST7735_Init();
+  HAL_TIM_Base_Start(&htim6);
+  HAL_DAC_Start_DMA(&hdac1, DAC_CHANNEL_1, SinusValues, 128U, DAC_ALIGN_12B_R);
   /* USER CODE END 2 */
 
   /* Init scheduler */
@@ -313,10 +330,10 @@ static void MX_TIM6_Init(void)
 
   /* USER CODE END TIM6_Init 1 */
   htim6.Instance = TIM6;
-  htim6.Init.Prescaler = 125;
+  htim6.Init.Prescaler = 125-1;
   htim6.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim6.Init.Period = 100;
-  htim6.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
+  htim6.Init.Period = 100-1;
+  htim6.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_Base_Init(&htim6) != HAL_OK)
   {
     Error_Handler();

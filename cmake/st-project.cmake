@@ -98,6 +98,8 @@ target_sources(
     "Middlewares\\Third_Party\\FreeRTOS\\Source\\stream_buffer.c"
     "Middlewares\\Third_Party\\FreeRTOS\\Source\\tasks.c"
     "Middlewares\\Third_Party\\FreeRTOS\\Source\\timers.c"
+    "Drivers\\STM32L4xx_HAL_Driver\\Src\\stm32l4xx_hal_adc_ex.c"
+    "Drivers\\STM32L4xx_HAL_Driver\\Src\\stm32l4xx_hal_adc.c"
     "Drivers\\STM32L4xx_HAL_Driver\\Src\\stm32l4xx_hal_cortex.c"
     "Drivers\\STM32L4xx_HAL_Driver\\Src\\stm32l4xx_hal_dac_ex.c"
     "Drivers\\STM32L4xx_HAL_Driver\\Src\\stm32l4xx_hal_dac.c"

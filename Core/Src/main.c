@@ -142,6 +142,7 @@ int main(void)
   HAL_TIM_Base_Start(&htim6);
   HAL_DAC_Start_DMA(&hdac1, DAC_CHANNEL_1, SinusValues, 128U, DAC_ALIGN_12B_R);
   HAL_ADC_Start_DMA(&hadc1, ADC_Buf[0], 128U * 3U * 3U);
+  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
   /* USER CODE END 2 */
 
   /* Init scheduler */

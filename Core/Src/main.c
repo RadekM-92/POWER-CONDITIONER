@@ -23,6 +23,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "st7735.h"
+#include "measurements.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/

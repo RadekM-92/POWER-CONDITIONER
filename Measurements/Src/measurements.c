@@ -10,4 +10,7 @@ typedef enum
 
 }ADC_Channels_Mapping_t;
 
+/**
+  * @brief  Measurements ADC Samples array
+  */
 Sample_t Samples[SAMPLES_AMOUNT_PER_ONE_PERIOD * AMOUNT_OF_PERIODS][AMOUNT_OF_MEASUREMENT_CHANNELS] = {0};

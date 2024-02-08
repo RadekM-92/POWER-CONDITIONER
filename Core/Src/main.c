@@ -49,7 +49,6 @@ uint32_t SinusValues[128] ={
    1378U, 1471U, 1565U, 1660U, 1756U, 1853U, 1950U, 2047
 };
 
-uint32_t ADC_Buf[128 * 3][3] = {0};
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -141,8 +140,8 @@ int main(void)
   /* USER CODE BEGIN 2 */
   ST7735_Init();
   HAL_TIM_Base_Start(&htim6);
-  HAL_DAC_Start_DMA(&hdac1, DAC_CHANNEL_1, SinusValues, 128U, DAC_ALIGN_12B_R);
-  HAL_ADC_Start_DMA(&hadc1, ADC_Buf[0], 128U * 3U * 3U);
+  HAL_DAC_Start_DMA(&hdac1, DAC_CHANNEL_1, SinusValues, SAMPLES_AMOUNT_PER_ONE_PERIOD, DAC_ALIGN_12B_R);
+  HAL_ADC_Start_DMA(&hadc1, Samples[0], AMOUNT_OF_ALL_SAMPLES);
   HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
   /* USER CODE END 2 */
 

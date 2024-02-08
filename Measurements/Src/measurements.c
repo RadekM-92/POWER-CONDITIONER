@@ -25,4 +25,4 @@ Sample_t Samples[SAMPLES_AMOUNT_PER_ONE_PERIOD * AMOUNT_OF_PERIODS][AMOUNT_OF_ME
   * @param Ref ADC reference voltage, ex. 3.3 [V]
   * @retval Real voltage value on ADC pin, ex. 2.5 [V]
   */
-float ADC_RawToReal(const Sample_t RawVal, const int16_t Res, const int16_t Ref);
+float ADC_RawToReal(const Sample_t RawVal, const int16_t Res, const float Ref);

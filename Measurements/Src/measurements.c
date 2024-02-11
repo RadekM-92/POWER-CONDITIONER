@@ -3,6 +3,8 @@
 
 #include "measurements.h"
 
+#define ADC_RES_Current 4096U
+#define ADC_Ref_Current 3.3f
 
 typedef enum
 {
@@ -123,4 +125,37 @@ float RMS_Calculate(const float *y, uint16_t size)
 
   return RMS;
 
+}
+
+/**
+  * @brief  Get current signal RMS value
+  * @retval Signal RMS value
+  */
+float Measure_getCurrentRMS(void)
+{
+  uint16_t n = SAMPLES_AMOUNT_PER_ONE_PERIOD * AMOUNT_OF_PERIODS_RMS;
+  Sample_t x[n];
+  float y[n];
+  float RMS;
+  uint16_t i;
+
+  // Get current signal samples from Samples buffer
+  for(i=0; i<n; i++)
+  {
+    x[i] = Samples[i][Current];
+  }
+
+  // Get real signal value samples
+  for(i=0; i<n; i++)
+  {
+    y[i] = SigRealVal(
+      ADC_RawToReal(x[i], ADC_RES_Current, ADC_Ref_Current),
+      1U
+    );
+  }
+
+  // Calculate RMS
+  RMS = RMS_Calculate(y, n);
+
+  return RMS;
 }

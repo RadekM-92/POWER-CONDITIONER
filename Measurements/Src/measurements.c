@@ -28,6 +28,15 @@ typedef const struct
   */
 Sample_t Samples[SAMPLES_AMOUNT_PER_ONE_PERIOD * AMOUNT_OF_PERIODS][AMOUNT_OF_MEASUREMENT_CHANNELS] = {0};
 
+/**
+  * @brief  ADC channels parameter array
+  */
+ADC_Ch_Param_t ADC_Chx_Param[AMOUNT_OF_MEASUREMENT_CHANNELS] = 
+{
+  {Current, 4096U, 3.3f, 100U},
+  {Voltage_Negative, 4096U, 3.3f, 100U},
+  {Voltage_Positive, 4096U, 3.3f, 100U}
+};
 
 
 /**

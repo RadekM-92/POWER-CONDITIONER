@@ -14,6 +14,15 @@ typedef enum
 
 }ADC_Channels_Mapping_t;
 
+typedef const struct
+{
+  uint8_t Chx;  /* Channel number */
+  uint16_t Res; /* ADC resolution */
+  float Ref;    /* ADC voltage reference */
+  float Divider;/* Voltage divider */
+}ADC_Ch_Param_t;
+
+
 /**
   * @brief  Measurements ADC Samples array
   */

@@ -78,6 +78,15 @@ float RMS_Calculate(const float *y, uint16_t size);
   */
 void Samples_getChxRawSamples(const uint8_t Chn, const uint8_t Chx, const Sample_t *Samples, Sample_t *x, const uint16_t n);
 
+/**
+  * @brief  Calculate signal real value
+  * 
+  * @param Chx Channel x number
+  * @param x Pointer to channel raw samples
+  * @param x Pointer to channel real samples
+  * @param n Amount of samples
+  */
+void Samples_CalcRealValue(const uint8_t Chx, const Sample_t *x, float *y, const uint16_t n);
 
 
 
@@ -172,6 +181,27 @@ void Samples_getChxRawSamples(const uint8_t Chn, const uint8_t Chx, const Sample
 }
 
 /**
+  * @brief  Calculate signal real value
+  * 
+  * @param Chx Channel x number
+  * @param x Pointer to channel raw samples
+  * @param x Pointer to channel real samples
+  * @param n Amount of samples
+  */
+void Samples_CalcRealValue(const uint8_t Chx, const Sample_t *x, float *y, const uint16_t n)
+{
+  uint16_t i;
+
+  for(i=0; i<n; i++)
+  {
+    y[i] = SigRealVal(
+      ADC_RawToReal(x[i], ADC_Chx_Param[Chx].Res, ADC_Chx_Param[Chx].Ref),
+      ADC_Chx_Param[Chx].Divider
+    );
+  }
+}
+
+/**
   * @brief  Get current signal RMS value
   * @retval Signal RMS value
   */
@@ -185,14 +215,15 @@ float Measure_getCurrentRMS(void)
 
   Samples_getChxRawSamples(AMOUNT_OF_MEASUREMENT_CHANNELS, ADC_Chx_Param[Current].Chx, Samples[0], x, n);
 
+  Samples_CalcRealValue(ADC_Chx_Param[Current].Chx, x, y, n);
   // Get real signal value samples
-  for(i=0; i<n; i++)
-  {
-    y[i] = SigRealVal(
-      ADC_RawToReal(x[i], ADC_Chx_Param[Current].Res, ADC_Chx_Param[Current].Ref),
-      1U
-    );
-  }
+  // for(i=0; i<n; i++)
+  // {
+  //   y[i] = SigRealVal(
+  //     ADC_RawToReal(x[i], ADC_Chx_Param[Current].Res, ADC_Chx_Param[Current].Ref),
+  //     1U
+  //   );
+  // }
 
   // Calculate RMS
   RMS = RMS_Calculate(y, n);

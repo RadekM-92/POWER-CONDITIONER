@@ -259,7 +259,7 @@ float Measure_getVoltageRMS(void)
   Samples_CalcRealValue(ADC_Chx_Param[Voltage_Positive].Chx, xp, yp, n);
   Samples_CalcRealValue(ADC_Chx_Param[Voltage_Positive].Chx, xn, yn, n);
 
-  //Samples_CalcDiff(x, y, diff, n)
+  Samples_CalcDiff(yp, yn, ydiff, n);
 
   return RMS_Calculate(ydiff, n);
 }

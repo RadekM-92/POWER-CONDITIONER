@@ -1,6 +1,8 @@
 #include "stdint.h"
+#include "math.h"
 
 #include "measurements.h"
+
 
 typedef enum
 {
@@ -37,6 +39,15 @@ float ADC_RawToReal(const Sample_t RawVal, const int16_t Res, const float Ref);
   */
 float SigRealVal(float ADC_RealVal, float SigDiv);
 
+
+/**
+  * @brief  RMS value calculation
+  * 
+  * @param y Pointer to samples buffer
+  * @param size Number of samples to calculate
+  * @retval Signal RMS value
+  */
+float RMS_Calculate(const float *y, uint16_t size);
 
 
 
@@ -81,4 +92,35 @@ float ADC_RawToReal(const Sample_t RawVal, const int16_t Res, const float Ref)
 float SigRealVal(float ADC_RealVal, float SigDiv)
 {
   return ADC_RealVal * SigDiv;
+}
+
+/**
+  * @brief  RMS value calculation
+  * 
+  * @param y Pointer to samples buffer
+  * @param size Number of samples to calculate
+  * @retval Signal RMS value
+  */
+float RMS_Calculate(const float *y, uint16_t size)
+{
+  uint16_t i;
+  float RMS = 0.0f;
+  float Sum = 0.0f;
+
+  for(i=0; i<size; i++)
+  {
+    Sum = Sum + y[i] * y[i];
+  }
+
+  if(size > 0)
+  {
+    RMS = sqrtf((Sum/(float)size));
+  }
+  else
+  {
+    ;
+  }
+
+  return RMS;
+
 }

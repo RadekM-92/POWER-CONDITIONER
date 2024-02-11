@@ -3,8 +3,6 @@
 
 #include "measurements.h"
 
-#define ADC_RES_Current 4096U
-#define ADC_Ref_Current 3.3f
 
 typedef enum
 {
@@ -191,7 +189,7 @@ float Measure_getCurrentRMS(void)
   for(i=0; i<n; i++)
   {
     y[i] = SigRealVal(
-      ADC_RawToReal(x[i], ADC_RES_Current, ADC_Ref_Current),
+      ADC_RawToReal(x[i], ADC_Chx_Param[Current].Res, ADC_Chx_Param[Current].Ref),
       1U
     );
   }

@@ -77,6 +77,14 @@ const osThreadAttr_t defaultTask_attributes = {
   .stack_size = 128 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
+
+/* Definitions for DisplayTask */
+osThreadId_t DisplayTaskHandle;
+const osThreadAttr_t DisplayTask_attributes = {
+  .name = "DisplayTask",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
+};
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -92,6 +100,7 @@ static void MX_TIM6_Init(void);
 static void MX_ADC1_Init(void);
 static void MX_TIM2_Init(void);
 void StartDefaultTask(void *argument);
+void StartDisplayTask(void *argument);
 
 /* USER CODE BEGIN PFP */
 
@@ -167,6 +176,9 @@ int main(void)
   /* Create the thread(s) */
   /* creation of defaultTask */
   defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
+
+  /* creation of DisplayTask */
+  DisplayTaskHandle = osThreadNew(StartDisplayTask, NULL, &DisplayTask_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -634,6 +646,27 @@ void StartDefaultTask(void *argument)
     ST7735_WriteString(0, 3*10+3*18, ":)", Font_16x26, ST7735_BLUE, ST7735_BLACK);
 
     vTaskDelay( 2000 / portTICK_RATE_MS );
+  }
+
+  vTaskDelete(NULL);
+  /* USER CODE END 5 */
+}
+
+/* USER CODE BEGIN Header_StartDisplayTask */
+/**
+  * @brief  Function implementing the DisplayTask thread.
+  * @param  argument: Not used
+  * @retval None
+  */
+/* USER CODE END Header_StartDefaultTask */
+void StartDisplayTask(void *argument)
+{
+  /* USER CODE BEGIN 5 */
+
+  /* Infinite loop */
+  for(;;)
+  {
+    vTaskDelay( 100 / portTICK_RATE_MS );
   }
 
   vTaskDelete(NULL);

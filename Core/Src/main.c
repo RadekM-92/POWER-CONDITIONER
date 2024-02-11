@@ -48,7 +48,8 @@ uint32_t SinusValues[128] ={
    577U, 644U, 714U, 788U, 865U, 944U, 1026U, 1111U, 1198U, 1287U,
    1378U, 1471U, 1565U, 1660U, 1756U, 1853U, 1950U, 2047
 };
-
+uint8_t Screen_Refresh = 1;
+uint8_t Screen_Init = 1;
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -640,10 +641,10 @@ void StartDefaultTask(void *argument)
     HAL_UART_Transmit(&huart2, "Hello World!\n", 13, 1000);
 
     // Check fonts
-    ST7735_FillScreen(ST7735_WHITE);
-    ST7735_WriteString(0, 0, "POWER-CONDITIONER", Font_7x10, ST7735_RED, ST7735_BLACK);
-    ST7735_WriteString(0, 3*10, "DEMO", Font_11x18, ST7735_GREEN, ST7735_BLACK);
-    ST7735_WriteString(0, 3*10+3*18, ":)", Font_16x26, ST7735_BLUE, ST7735_BLACK);
+    // ST7735_FillScreen(ST7735_WHITE);
+    // ST7735_WriteString(0, 0, "POWER-CONDITIONER", Font_7x10, ST7735_RED, ST7735_BLACK);
+    // ST7735_WriteString(0, 3*10, "DEMO", Font_11x18, ST7735_GREEN, ST7735_BLACK);
+    // ST7735_WriteString(0, 3*10+3*18, ":)", Font_16x26, ST7735_BLUE, ST7735_BLACK);
 
     vTaskDelay( 2000 / portTICK_RATE_MS );
   }
@@ -666,6 +667,28 @@ void StartDisplayTask(void *argument)
   /* Infinite loop */
   for(;;)
   {
+    if(1 == Screen_Init)
+    {
+      ST7735_FillScreen(ST7735_WHITE);
+      ST7735_WriteString(20, 0, "POWER CONDITIONER", Font_7x10, ST7735_WHITE, ST7735_BLACK);
+      ST7735_WriteString(0, 20, "V_RMS: 000.0 V", Font_11x18, ST7735_MAGENTA, ST7735_WHITE);
+      ST7735_WriteString(0, 40, "I_RMS: 0.000 A", Font_11x18, ST7735_BLUE, ST7735_WHITE);
+      ST7735_WriteString(0, 60, "FRQ:  00.00 Hz", Font_11x18, ST7735_GREEN, ST7735_WHITE);
+      ST7735_WriteString(0, 80, "Vpp: 000.0 V", Font_11x18, ST7735_MAGENTA, ST7735_WHITE);
+      ST7735_WriteString(0, 100, "Ipp: 00.00 A", Font_11x18, ST7735_BLUE, ST7735_WHITE);
+
+      Screen_Init = 0;
+    }
+    else
+    {
+      if(1 == Screen_Refresh)
+      {
+
+
+        Screen_Refresh = 0;
+      }
+    }
+    
     vTaskDelay( 100 / portTICK_RATE_MS );
   }
 

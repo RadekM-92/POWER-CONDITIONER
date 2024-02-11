@@ -168,10 +168,11 @@ float Measure_getCurrentRMS(void)
   uint16_t i;
 
   // Get current signal samples from Samples buffer
-  for(i=0; i<n; i++)
-  {
-    x[i] = Samples[i][Current];
-  }
+  // for(i=0; i<n; i++)
+  // {
+  //   x[i] = Samples[i][Current];
+  // }
+  Samples_getSample(AMOUNT_OF_MEASUREMENT_CHANNELS, Current, Samples[0], x, n);
 
   // Get real signal value samples
   for(i=0; i<n; i++)

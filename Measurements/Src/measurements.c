@@ -88,7 +88,15 @@ void Samples_getChxRawSamples(const uint8_t Chn, const uint8_t Chx, const Sample
   */
 void Samples_CalcRealValue(const uint8_t Chx, const Sample_t *x, float *y, const uint16_t n);
 
-
+/**
+  * @brief  Calculate two real value difference
+  * 
+  * @param y1 Pointer to channel y1 real samples
+  * @param y2 Pointer to channel y2 real samples
+  * @param y Pointer to difference real samples
+  * @param n Amount of samples
+  */
+void Samples_CalcDiff(const float *y1, const float *y2, float *y, const uint16_t n);
 
 
 
@@ -198,6 +206,24 @@ void Samples_CalcRealValue(const uint8_t Chx, const Sample_t *x, float *y, const
       ADC_RawToReal(x[i], ADC_Chx_Param[Chx].Res, ADC_Chx_Param[Chx].Ref),
       ADC_Chx_Param[Chx].Divider
     );
+  }
+}
+
+/**
+  * @brief  Calculate two real value difference
+  * 
+  * @param y1 Pointer to channel y1 real samples
+  * @param y2 Pointer to channel y2 real samples
+  * @param y Pointer to difference real samples
+  * @param n Amount of samples
+  */
+void Samples_CalcDiff(const float *y1, const float *y2, float *y, const uint16_t n)
+{
+  uint16_t i;
+
+  for(i=0; i<n; i++)
+  {
+    y[i] = y1[i] - y2[i];
   }
 }
 

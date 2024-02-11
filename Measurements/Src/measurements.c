@@ -51,7 +51,16 @@ float SigRealVal(float ADC_RealVal, float SigDiv);
   */
 float RMS_Calculate(const float *y, uint16_t size);
 
-
+/**
+  * @brief  Get signal samples for one channel from n channels samples
+  * 
+  * @param Chn Channels amount
+  * @param Chx Channel x number
+  * @param Samples Pointer to all channels samples
+  * @param x Pointer to channel samples
+  * @param n Amount of samples for one channel
+  */
+void Samples_getSample(const uint8_t Chn, const uint8_t Chx, const Sample_t *Samples, Sample_t *x, const uint16_t n);
 
 
 
@@ -125,6 +134,25 @@ float RMS_Calculate(const float *y, uint16_t size)
 
   return RMS;
 
+}
+
+/**
+  * @brief  Get signal samples for one channel from n channels samples
+  * 
+  * @param Chn Channels amount
+  * @param Chx Channel x number
+  * @param Samples Pointer to all channels samples
+  * @param x Pointer to channel samples
+  * @param n Amount of samples for one channel
+  */
+void Samples_getSample(const uint8_t Chn, const uint8_t Chx, const Sample_t *Samples, Sample_t *x, const uint16_t n)
+{
+  uint16_t i;
+
+  for(i=0; i<n; i++)
+  {
+    *(x + i) = *(Samples + i*Chn + Chx);
+  }
 }
 
 /**

@@ -211,19 +211,12 @@ float Measure_getCurrentRMS(void)
   Sample_t x[n];
   float y[n];
   float RMS;
-  uint16_t i;
+
 
   Samples_getChxRawSamples(AMOUNT_OF_MEASUREMENT_CHANNELS, ADC_Chx_Param[Current].Chx, Samples[0], x, n);
 
-  Samples_CalcRealValue(ADC_Chx_Param[Current].Chx, x, y, n);
   // Get real signal value samples
-  // for(i=0; i<n; i++)
-  // {
-  //   y[i] = SigRealVal(
-  //     ADC_RawToReal(x[i], ADC_Chx_Param[Current].Res, ADC_Chx_Param[Current].Ref),
-  //     1U
-  //   );
-  // }
+  Samples_CalcRealValue(ADC_Chx_Param[Current].Chx, x, y, n);
 
   // Calculate RMS
   RMS = RMS_Calculate(y, n);

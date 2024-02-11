@@ -12,5 +12,6 @@ typedef uint32_t Sample_t;
 extern Sample_t Samples[SAMPLES_AMOUNT_PER_ONE_PERIOD * AMOUNT_OF_PERIODS][AMOUNT_OF_MEASUREMENT_CHANNELS];
 
 extern float Measure_getCurrentRMS(void);
+extern float Measure_getVoltageRMS(void);
 
 #endif

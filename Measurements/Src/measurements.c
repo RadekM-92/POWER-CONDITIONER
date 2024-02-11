@@ -216,3 +216,24 @@ float Measure_getCurrentRMS(void)
 
   return RMS_Calculate(y, n);
 }
+
+/**
+  * @brief  Get voltage signal RMS value. Two ADC channels are used for measuremt positive and negative sine value separetly.
+  * @retval Signal RMS value
+  */
+float Measure_getVoltageRMS(void)
+{
+  uint16_t n = SAMPLES_AMOUNT_PER_ONE_PERIOD * AMOUNT_OF_PERIODS_RMS;
+  Sample_t xp[n], xn[n];
+  float yp[n], yn[n], ydiff[n];
+
+  Samples_getChxRawSamples(AMOUNT_OF_MEASUREMENT_CHANNELS, ADC_Chx_Param[Voltage_Positive].Chx, Samples[0], xp, n);
+  Samples_getChxRawSamples(AMOUNT_OF_MEASUREMENT_CHANNELS, ADC_Chx_Param[Voltage_Negative].Chx, Samples[0], xn, n);
+
+  Samples_CalcRealValue(ADC_Chx_Param[Voltage_Positive].Chx, xp, yp, n);
+  Samples_CalcRealValue(ADC_Chx_Param[Voltage_Positive].Chx, xn, yn, n);
+
+  //Samples_CalcDiff(x, y, diff, n)
+
+  return RMS_Calculate(ydiff, n);
+}

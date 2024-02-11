@@ -183,7 +183,7 @@ float Measure_getCurrentRMS(void)
   float RMS;
   uint16_t i;
 
-  Samples_getChxRawSamples(AMOUNT_OF_MEASUREMENT_CHANNELS, Current, Samples[0], x, n);
+  Samples_getChxRawSamples(AMOUNT_OF_MEASUREMENT_CHANNELS, ADC_Chx_Param[Current].Chx, Samples[0], x, n);
 
   // Get real signal value samples
   for(i=0; i<n; i++)

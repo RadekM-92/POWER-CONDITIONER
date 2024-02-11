@@ -28,6 +28,14 @@ Sample_t Samples[SAMPLES_AMOUNT_PER_ONE_PERIOD * AMOUNT_OF_PERIODS][AMOUNT_OF_ME
 float ADC_RawToReal(const Sample_t RawVal, const int16_t Res, const float Ref);
 
 
+/**
+  * @brief  Conversion from Real ADC value to real signal value
+  * 
+  * @param ADC_RealVal Real voltage on ADC input, ex. 2.5 [V]
+  * @param SigDiv Signal divider, ex. 12.0f
+  * @retval Real signal value, ex. 110 [V]
+  */
+float SigRealVal(float ADC_RealVal, float SigDiv);
 
 
 
@@ -61,4 +69,16 @@ float ADC_RawToReal(const Sample_t RawVal, const int16_t Res, const float Ref)
     {
 
     }
+}
+
+/**
+  * @brief  Conversion from Real ADC value to real signal value
+  * 
+  * @param ADC_RealVal Real voltage on ADC input, ex. 2.5 [V]
+  * @param SigDiv Signal divider, ex. 12.0f
+  * @retval Real signal value, ex. 110 [V]
+  */
+float SigRealVal(float ADC_RealVal, float SigDiv)
+{
+  return ADC_RealVal * SigDiv;
 }

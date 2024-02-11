@@ -210,16 +210,9 @@ float Measure_getCurrentRMS(void)
   uint16_t n = SAMPLES_AMOUNT_PER_ONE_PERIOD * AMOUNT_OF_PERIODS_RMS;
   Sample_t x[n];
   float y[n];
-  float RMS;
-
 
   Samples_getChxRawSamples(AMOUNT_OF_MEASUREMENT_CHANNELS, ADC_Chx_Param[Current].Chx, Samples[0], x, n);
-
-  // Get real signal value samples
   Samples_CalcRealValue(ADC_Chx_Param[Current].Chx, x, y, n);
 
-  // Calculate RMS
-  RMS = RMS_Calculate(y, n);
-
-  return RMS;
+  return RMS_Calculate(y, n);
 }

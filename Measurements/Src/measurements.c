@@ -60,7 +60,7 @@ float RMS_Calculate(const float *y, uint16_t size);
   * @param x Pointer to channel samples
   * @param n Amount of samples for one channel
   */
-void Samples_getSample(const uint8_t Chn, const uint8_t Chx, const Sample_t *Samples, Sample_t *x, const uint16_t n);
+void Samples_getChxRawSamples(const uint8_t Chn, const uint8_t Chx, const Sample_t *Samples, Sample_t *x, const uint16_t n);
 
 
 
@@ -145,7 +145,7 @@ float RMS_Calculate(const float *y, uint16_t size)
   * @param x Pointer to channel samples
   * @param n Amount of samples for one channel
   */
-void Samples_getSample(const uint8_t Chn, const uint8_t Chx, const Sample_t *Samples, Sample_t *x, const uint16_t n)
+void Samples_getChxRawSamples(const uint8_t Chn, const uint8_t Chx, const Sample_t *Samples, Sample_t *x, const uint16_t n)
 {
   uint16_t i;
 
@@ -167,12 +167,7 @@ float Measure_getCurrentRMS(void)
   float RMS;
   uint16_t i;
 
-  // Get current signal samples from Samples buffer
-  // for(i=0; i<n; i++)
-  // {
-  //   x[i] = Samples[i][Current];
-  // }
-  Samples_getSample(AMOUNT_OF_MEASUREMENT_CHANNELS, Current, Samples[0], x, n);
+  Samples_getChxRawSamples(AMOUNT_OF_MEASUREMENT_CHANNELS, Current, Samples[0], x, n);
 
   // Get real signal value samples
   for(i=0; i<n; i++)

@@ -36,6 +36,17 @@ ADC_Ch_Param_t ADC_Chx_Param[AMOUNT_OF_MEASUREMENT_CHANNELS] =
   {Voltage_Positive, 4096U, 3.3f, 100U}
 };
 
+/**
+  * @brief  Measurement watch list
+  */
+Measure_Watch_List_t Measure_Watch_list = 
+{
+  .Vrms = 0.0f,
+  .Irms = 0.0f,
+  .FRQ = 0.0f,
+  .Vpp = 0.0f,
+  .Ipp = 0.0f
+};
 
 /**
   * @brief  Conversion from Raw ADC value to real value

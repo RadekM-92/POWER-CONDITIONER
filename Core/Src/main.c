@@ -91,7 +91,7 @@ const osThreadAttr_t DisplayTask_attributes = {
 osThreadId_t CalculationTaskHandle;
 const osThreadAttr_t CalculationTask_attributes = {
   .name = "CalculationTask",
-  .stack_size = 128 * 4,
+  .stack_size = 1280 * 4,
   .priority = (osPriority_t) osPriorityHigh,
 };
 /* USER CODE BEGIN PV */

@@ -86,6 +86,14 @@ const osThreadAttr_t DisplayTask_attributes = {
   .stack_size = 128 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
+
+/* Definitions for CalculationTask */
+osThreadId_t CalculationTaskHandle;
+const osThreadAttr_t CalculationTask_attributes = {
+  .name = "CalculationTask",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityHigh,
+};
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -102,6 +110,7 @@ static void MX_ADC1_Init(void);
 static void MX_TIM2_Init(void);
 void StartDefaultTask(void *argument);
 void StartDisplayTask(void *argument);
+void StartCalculationTask(void *argument);
 
 /* USER CODE BEGIN PFP */
 
@@ -180,6 +189,9 @@ int main(void)
 
   /* creation of DisplayTask */
   DisplayTaskHandle = osThreadNew(StartDisplayTask, NULL, &DisplayTask_attributes);
+
+  /* creation of CalculationTask */
+  CalculationTaskHandle = osThreadNew(StartCalculationTask, NULL, &CalculationTask_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -659,7 +671,7 @@ void StartDefaultTask(void *argument)
   * @param  argument: Not used
   * @retval None
   */
-/* USER CODE END Header_StartDefaultTask */
+/* USER CODE END Header_StartDisplayTask */
 void StartDisplayTask(void *argument)
 {
   /* USER CODE BEGIN 5 */
@@ -689,6 +701,28 @@ void StartDisplayTask(void *argument)
       }
     }
     
+    vTaskDelay( 100 / portTICK_RATE_MS );
+  }
+
+  vTaskDelete(NULL);
+  /* USER CODE END 5 */
+}
+
+/* USER CODE BEGIN Header_StartCalculationTask */
+/**
+  * @brief  Function implementing the CalculationTask thread.
+  * @param  argument: Not used
+  * @retval None
+  */
+/* USER CODE END Header_StartCalculationTask */
+void StartCalculationTask(void *argument)
+{
+  /* USER CODE BEGIN 5 */
+
+  /* Infinite loop */
+  for(;;)
+  {
+
     vTaskDelay( 100 / portTICK_RATE_MS );
   }
 

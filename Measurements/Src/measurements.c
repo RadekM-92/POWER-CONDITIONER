@@ -20,6 +20,13 @@ typedef const struct
   float Divider;/* Voltage divider */
 }ADC_Ch_Param_t;
 
+typedef struct{
+    float Vrms; /* Voltage RMS */
+    float Irms; /* Current RMS */
+    float FRQ;  /* Frequency */
+    float Vpp;  /* Voltage pick to pick */
+    float Ipp;  /* Current pick to pick */
+}Measure_Watch_List_t;
 
 /**
   * @brief  Measurements ADC Samples array

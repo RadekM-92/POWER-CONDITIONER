@@ -724,11 +724,7 @@ void StartCalculationTask(void *argument)
   {
     if(HAL_DMA_GetState(&hdma_adc1) == HAL_DMA_STATE_READY)
     {
-      Measure_Watch_list.Vrms = Measure_getVoltageRMS();
-      Measure_Watch_list.Irms = Measure_getCurrentRMS();
-      Measure_Watch_list.FRQ = 0.0f;  //Measure_getFRQ();
-      Measure_Watch_list.Vpp = 0.0f;  //Measure_getVpp();
-      Measure_Watch_list.Ipp = 0.0f;  //Measure_getIpp();
+      Measure_Calculate();
 
       Screen_Refresh = 1;
       HAL_ADC_Start_DMA(&hadc1, Samples[0], AMOUNT_OF_ALL_SAMPLES);

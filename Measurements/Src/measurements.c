@@ -109,9 +109,17 @@ void Samples_CalcRealValue(const uint8_t Chx, const Sample_t *x, float *y, const
   */
 void Samples_CalcDiff(const float *y1, const float *y2, float *y, const uint16_t n);
 
+/**
+  * @brief  Get current signal RMS value
+  * @retval Signal RMS value
+  */
+float Measure_getCurrentRMS(void);
 
-
-
+/**
+  * @brief  Get voltage signal RMS value. Two ADC channels are used for measuremt positive and negative sine value separetly.
+  * @retval Signal RMS value
+  */
+float Measure_getVoltageRMS(void);
 
 
 
@@ -273,4 +281,17 @@ float Measure_getVoltageRMS(void)
   Samples_CalcDiff(yp, yn, ydiff, n);
 
   return RMS_Calculate(ydiff, n);
+}
+
+
+/**
+  * @brief Start calculation on measuremnt
+  */
+void Measure_Calculate(void)
+{
+  Measure_Watch_list.Vrms = Measure_getVoltageRMS();
+  Measure_Watch_list.Irms = Measure_getCurrentRMS();
+  Measure_Watch_list.FRQ = 0.0f;  //Measure_getFRQ();
+  Measure_Watch_list.Vpp = 0.0f;  //Measure_getVpp();
+  Measure_Watch_list.Ipp = 0.0f;  //Measure_getIpp();
 }

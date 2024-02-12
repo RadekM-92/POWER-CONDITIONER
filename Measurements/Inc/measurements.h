@@ -19,7 +19,8 @@ typedef struct{
 extern Sample_t Samples[SAMPLES_AMOUNT_PER_ONE_PERIOD * AMOUNT_OF_PERIODS][AMOUNT_OF_MEASUREMENT_CHANNELS];
 extern Measure_Watch_List_t Measure_Watch_list;
 
-extern float Measure_getCurrentRMS(void);
-extern float Measure_getVoltageRMS(void);
+
+
+extern void Measure_Calculate(void);
 
 #endif

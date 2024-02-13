@@ -163,8 +163,9 @@ int main(void)
   HAL_ADC_Start_DMA(&hadc1, Samples[0], AMOUNT_OF_ALL_SAMPLES);
   HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
   /* USER CODE END 2 */
-  char buf[7] = {0};
-  ST7735_ftoa(3U, 2U, 568.123f, buf, 7);
+  char buf[7]={0};
+  ST7735_ftoa(3U, 2U, 325.48f, buf, 7);
+
   /* Init scheduler */
   osKernelInitialize();
 

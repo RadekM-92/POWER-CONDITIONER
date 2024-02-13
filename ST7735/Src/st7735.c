@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 #include "stm32l4xx_hal.h"
 #include "st7735.h"
 #include "malloc.h"
@@ -324,5 +326,7 @@ void ST7735_ftoa(uint8_t decimal, uint8_t precision, float src, char *des, uint8
 
   decimal_value = (int32_t)src;
   precision_value = (int32_t)(src * (float)(precision_pow) - (float)decimal_value * (float)(precision_pow));
+
+  snprintf(des, size, "%d.%d", decimal_value, precision_value);
 
 }

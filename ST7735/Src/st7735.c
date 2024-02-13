@@ -309,3 +309,20 @@ void ST7735_SetGamma(GammaDef gamma)
 	ST7735_WriteData((uint8_t *) &gamma, sizeof(gamma));
 	ST7735_Unselect();
 }
+
+void ST7735_ftoa(uint8_t decimal, uint8_t precision, float src, char *des, uint8_t size)
+{
+  int32_t decimal_value;
+  int32_t precision_value;
+
+  uint8_t i;
+  int precision_pow = 10;
+  do{
+    precision_pow *= 10;
+    ++i;
+  }while(i<precision);
+
+  decimal_value = (int32_t)src;
+  precision_value = (int32_t)(src * (float)(precision_pow) - (float)decimal_value * (float)(precision_pow));
+
+}

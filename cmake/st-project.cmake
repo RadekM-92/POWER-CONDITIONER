@@ -54,9 +54,11 @@ target_compile_options(
     "$<$<CONFIG:Debug>:-mcpu=cortex-m4>"
     "$<$<CONFIG:Debug>:-mfpu=fpv4-sp-d16>"
     "$<$<CONFIG:Debug>:-mfloat-abi=hard>"
+    "$<$<CONFIG:Debug>:-u _printf_float>"
     "$<$<NOT:$<CONFIG:Debug>>:-mcpu=cortex-m4>"
     "$<$<NOT:$<CONFIG:Debug>>:-mfpu=fpv4-sp-d16>"
     "$<$<NOT:$<CONFIG:Debug>>:-mfloat-abi=hard>"
+    "$<$<NOT:$<CONFIG:Debug>>:-u _printf_float>"
 )
 
 target_link_libraries(
@@ -72,12 +74,14 @@ target_link_options(
     "$<$<CONFIG:Debug>:-mcpu=cortex-m4>"
     "$<$<CONFIG:Debug>:-mfpu=fpv4-sp-d16>"
     "$<$<CONFIG:Debug>:-mfloat-abi=hard>"
+    "$<$<CONFIG:Debug>:-u _printf_float>"
     "$<$<NOT:$<CONFIG:Debug>>:-mcpu=cortex-m4>"
     "$<$<NOT:$<CONFIG:Debug>>:-mfpu=fpv4-sp-d16>"
     "$<$<NOT:$<CONFIG:Debug>>:-mfloat-abi=hard>"
     -T
     "$<$<CONFIG:Debug>:${PROJECT_SOURCE_DIR}/STM32L476RGTX_FLASH.ld>"
     "$<$<NOT:$<CONFIG:Debug>>:${PROJECT_SOURCE_DIR}/STM32L476RGTX_FLASH.ld>"
+    "$<$<NOT:$<CONFIG:Debug>>:-u _printf_float>"
 )
 
 target_sources(

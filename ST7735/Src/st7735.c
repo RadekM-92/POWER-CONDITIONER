@@ -8,6 +8,12 @@
 
 #define DELAY 0x80
 
+char Line_V_RMS[] = "V_RMS: 000.0 V";
+char Line_I_RMS[] = "I_RMS: 0.000 A";
+char Line_FRQ[] = "FRQ:  00.00 Hz";
+char Line_Vpp[] = "Vpp: 000.0 V";
+char Line_Ipp[] = "Ipp: 00.00 A";
+
 // based on Adafruit ST7735 library for Arduino
 static const uint8_t
   init_cmds1[] = {            // Init for 7735R, part 1 (red or green tab)

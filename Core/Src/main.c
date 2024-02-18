@@ -652,13 +652,7 @@ void StartDefaultTask(void *argument)
   for(;;)
   {
     HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
-    HAL_UART_Transmit(&huart2, "Hello World!\n", 13, 1000);
-
-    // Check fonts
-    // ST7735_FillScreen(ST7735_WHITE);
-    // ST7735_WriteString(0, 0, "POWER-CONDITIONER", Font_7x10, ST7735_RED, ST7735_BLACK);
-    // ST7735_WriteString(0, 3*10, "DEMO", Font_11x18, ST7735_GREEN, ST7735_BLACK);
-    // ST7735_WriteString(0, 3*10+3*18, ":)", Font_16x26, ST7735_BLUE, ST7735_BLACK);
+    HAL_UART_Transmit(&huart2, "Default\r\n", 10, 1000);
 
     vTaskDelay( 2000 / portTICK_RATE_MS );
   }
@@ -680,6 +674,7 @@ void StartDisplayTask(void *argument)
 
   /* Infinite loop */
   for(;;)
+  HAL_UART_Transmit(&huart2, "Display\r\n", 10, 1000);
   {
     if(1 == Screen_Init)
     {
@@ -716,6 +711,8 @@ void StartCalculationTask(void *argument)
   /* Infinite loop */
   for(;;)
   {
+    HAL_UART_Transmit(&huart2, "Calc\r\n", 7, 1000);
+
     if(HAL_DMA_GetState(&hdma_adc1) == HAL_DMA_STATE_READY)
     {
       Measure_Calculate();

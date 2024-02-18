@@ -259,6 +259,7 @@ void ST7735_InvertColors(bool invert);
 void ST7735_SetGamma(GammaDef gamma);
 
 void ST7735_ftoa(uint8_t decimal, uint8_t precision, float src, char *des, uint8_t size);
+void ScreenInit(void);
 
 #ifdef __cplusplus
 }

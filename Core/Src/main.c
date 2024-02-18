@@ -683,22 +683,13 @@ void StartDisplayTask(void *argument)
   {
     if(1 == Screen_Init)
     {
-      ST7735_FillScreen(ST7735_WHITE);
-      ST7735_WriteString(20, 0, "POWER CONDITIONER", Font_7x10, ST7735_WHITE, ST7735_BLACK);
-      ST7735_WriteString(0, 20, "V_RMS: 000.0 V", Font_11x18, ST7735_MAGENTA, ST7735_WHITE);
-      ST7735_WriteString(0, 40, "I_RMS: 0.000 A", Font_11x18, ST7735_BLUE, ST7735_WHITE);
-      ST7735_WriteString(0, 60, "FRQ:  00.00 Hz", Font_11x18, ST7735_GREEN, ST7735_WHITE);
-      ST7735_WriteString(0, 80, "Vpp: 000.0 V", Font_11x18, ST7735_MAGENTA, ST7735_WHITE);
-      ST7735_WriteString(0, 100, "Ipp: 00.00 A", Font_11x18, ST7735_BLUE, ST7735_WHITE);
-
+      ScreenInit();
       Screen_Init = 0;
     }
     else
     {
       if(1 == Screen_Refresh)
       {
-
-
         Screen_Refresh = 0;
       }
     }

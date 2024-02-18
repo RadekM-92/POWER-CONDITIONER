@@ -690,6 +690,7 @@ void StartDisplayTask(void *argument)
     {
       if(1 == Screen_Refresh)
       {
+        ScreenMeasureRefresh();
         Screen_Refresh = 0;
       }
     }

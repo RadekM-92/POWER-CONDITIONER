@@ -341,3 +341,8 @@ void ScreenInit(void)
   ST7735_WriteString(0, 80, "Vpp: 000.0 V", Font_11x18, ST7735_MAGENTA, ST7735_WHITE);
   ST7735_WriteString(0, 100, "Ipp: 00.00 A", Font_11x18, ST7735_BLUE, ST7735_WHITE);
 }
+
+void ScreenMeasureRefresh(void)
+{
+  
+}

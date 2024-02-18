@@ -324,7 +324,7 @@ void ST7735_ftoa(uint8_t decimal, uint8_t precision, float src, char *des, uint8
   int32_t decimal_value;
   int32_t precision_value;
 
-  uint8_t i;
+  uint8_t i=0;
   int precision_pow = 10;
   do{
     precision_pow *= 10;

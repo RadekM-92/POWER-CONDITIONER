@@ -351,5 +351,25 @@ void ScreenInit(void)
 
 void ScreenMeasureRefresh(void)
 {
+  char Measure[6]={0};
 
+  ST7735_ftoa(3U, 1U, Measure_Watch_list.Vrms, Measure, 6);
+  strncpy(Line_V_RMS + 7, Measure, 5);
+  ST7735_WriteString(0, 20, Line_V_RMS, Font_11x18, ST7735_MAGENTA, ST7735_WHITE);
+
+  ST7735_ftoa(1U, 3U, Measure_Watch_list.Irms, Measure, 6);
+  strncpy(Line_I_RMS + 7, Measure, 5);
+  ST7735_WriteString(0, 40, Line_I_RMS, Font_11x18, ST7735_BLUE, ST7735_WHITE);
+
+  ST7735_ftoa(2U, 2U, Measure_Watch_list.FRQ, Measure, 6);
+  strncpy(Line_FRQ + 6, Measure, 5);
+  ST7735_WriteString(0, 60, Line_FRQ, Font_11x18, ST7735_GREEN, ST7735_WHITE);
+
+  ST7735_ftoa(3U, 1U, Measure_Watch_list.Vpp, Measure, 6);
+  strncpy(Line_Vpp + 5, Measure, 5);
+  ST7735_WriteString(0, 80, Line_Vpp, Font_11x18, ST7735_MAGENTA, ST7735_WHITE);
+  
+  ST7735_ftoa(2U, 2U, Measure_Watch_list.Ipp, Measure, 6);
+  strncpy(Line_Ipp + 5, Measure, 5);
+  ST7735_WriteString(0, 100, Line_Ipp, Font_11x18, ST7735_BLUE, ST7735_WHITE);
 }

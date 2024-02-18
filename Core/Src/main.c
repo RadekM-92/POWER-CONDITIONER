@@ -165,7 +165,7 @@ int main(void)
   /* USER CODE END 2 */
   char buf[7]={0};
   ST7735_ftoa(3U, 2U, 325.48f, buf, 7);
-
+  
   /* Init scheduler */
   osKernelInitialize();
 

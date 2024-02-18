@@ -342,14 +342,14 @@ void ScreenInit(void)
 {
   ST7735_FillScreen(ST7735_WHITE);
   ST7735_WriteString(20, 0, "POWER CONDITIONER", Font_7x10, ST7735_WHITE, ST7735_BLACK);
-  ST7735_WriteString(0, 20, "V_RMS: 000.0 V", Font_11x18, ST7735_MAGENTA, ST7735_WHITE);
-  ST7735_WriteString(0, 40, "I_RMS: 0.000 A", Font_11x18, ST7735_BLUE, ST7735_WHITE);
-  ST7735_WriteString(0, 60, "FRQ:  00.00 Hz", Font_11x18, ST7735_GREEN, ST7735_WHITE);
-  ST7735_WriteString(0, 80, "Vpp: 000.0 V", Font_11x18, ST7735_MAGENTA, ST7735_WHITE);
-  ST7735_WriteString(0, 100, "Ipp: 00.00 A", Font_11x18, ST7735_BLUE, ST7735_WHITE);
+  ST7735_WriteString(0, 20, Line_V_RMS, Font_11x18, ST7735_MAGENTA, ST7735_WHITE);
+  ST7735_WriteString(0, 40, Line_I_RMS, Font_11x18, ST7735_BLUE, ST7735_WHITE);
+  ST7735_WriteString(0, 60, Line_FRQ, Font_11x18, ST7735_GREEN, ST7735_WHITE);
+  ST7735_WriteString(0, 80, Line_Vpp, Font_11x18, ST7735_MAGENTA, ST7735_WHITE);
+  ST7735_WriteString(0, 100, Line_Ipp, Font_11x18, ST7735_BLUE, ST7735_WHITE);
 }
 
 void ScreenMeasureRefresh(void)
 {
-  
+
 }

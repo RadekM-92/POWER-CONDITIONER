@@ -654,7 +654,7 @@ void StartDefaultTask(void *argument)
     HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
     HAL_UART_Transmit(&huart2, "Default\r\n", 10, 1000);
 
-    vTaskDelay( 2000 / portTICK_RATE_MS );
+    vTaskDelay( 1000 / portTICK_RATE_MS );
   }
 
   vTaskDelete(NULL);
@@ -674,8 +674,9 @@ void StartDisplayTask(void *argument)
 
   /* Infinite loop */
   for(;;)
-  HAL_UART_Transmit(&huart2, "Display\r\n", 10, 1000);
   {
+    HAL_UART_Transmit(&huart2, "Display\r\n", 10, 1000);
+    
     if(1 == Screen_Init)
     {
       ScreenInit();
@@ -690,7 +691,7 @@ void StartDisplayTask(void *argument)
       }
     }
     
-    vTaskDelay( 100 / portTICK_RATE_MS );
+    vTaskDelay( 500 / portTICK_RATE_MS );
   }
 
   vTaskDelete(NULL);

@@ -324,18 +324,36 @@ void ST7735_ftoa(uint8_t decimal, uint8_t precision, float src, char *des, uint8
   int32_t decimal_value;
   int32_t precision_value;
 
-  uint8_t i=0;
-  int precision_pow = 10;
-  do{
+  uint8_t i;
+
+  int precision_pow = 1;
+  i=0;
+  while(i<precision)
+  {
     precision_pow *= 10;
     ++i;
-  }while(i<precision);
+  }
+
+  int decimal_pow = 1;
+  i=0;
+  while(i<decimal)
+  {
+    decimal_pow *= 10;
+    ++i;
+  }
 
   decimal_value = (int32_t)src;
   precision_value = (int32_t)(src * (float)(precision_pow) - (float)decimal_value * (float)(precision_pow));
 
-  snprintf(des, size, "%d.%d", decimal_value, precision_value);
-
+  if (decimal_value >= decimal_pow 
+      || 0.0f == src)
+  {
+    memset(des, '0', size);
+  }
+  else
+  {
+    snprintf(des, size, "%d.%d", decimal_value, precision_value);
+  }
 }
 
 void ScreenInit(void)

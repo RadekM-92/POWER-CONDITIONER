@@ -676,20 +676,20 @@ void StartDisplayTask(void *argument)
   for(;;)
   {
     HAL_UART_Transmit(&huart2, "Display\r\n", 10, 1000);
-    
-    if(1 == Screen_Init)
-    {
-      ScreenInit();
-      Screen_Init = 0;
-    }
-    else
-    {
-      if(1 == Screen_Refresh)
-      {
-        ScreenMeasureRefresh();
-        Screen_Refresh = 0;
-      }
-    }
+
+    // if(1 == Screen_Init)
+    // {
+    //   ScreenInit();
+    //   Screen_Init = 0;
+    // }
+    // else
+    // {
+    //   if(1 == Screen_Refresh)
+    //   {
+    //     ScreenMeasureRefresh();
+    //     Screen_Refresh = 0;
+    //   }
+    // }
     
     vTaskDelay( 500 / portTICK_RATE_MS );
   }
@@ -714,14 +714,14 @@ void StartCalculationTask(void *argument)
   {
     HAL_UART_Transmit(&huart2, "Calc\r\n", 7, 1000);
 
-    if(HAL_DMA_GetState(&hdma_adc1) == HAL_DMA_STATE_READY)
-    {
-      Measure_Calculate();
+    // if(HAL_DMA_GetState(&hdma_adc1) == HAL_DMA_STATE_READY)
+    // {
+    //   // Measure_Calculate();
 
-      Screen_Refresh = 1;
-      HAL_ADC_Start_DMA(&hadc1, Samples[0], AMOUNT_OF_ALL_SAMPLES);
-    }
-    vTaskDelay( 100 / portTICK_RATE_MS );
+    //   Screen_Refresh = 1;
+    //   HAL_ADC_Start_DMA(&hadc1, Samples[0], AMOUNT_OF_ALL_SAMPLES);
+    // }
+    vTaskDelay( 250 / portTICK_RATE_MS );
   }
 
   vTaskDelete(NULL);

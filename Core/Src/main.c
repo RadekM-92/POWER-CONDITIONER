@@ -19,7 +19,8 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "cmsis_os.h"
-
+#include "queue.h"
+#include "semphr.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "st7735.h"
@@ -48,8 +49,8 @@ uint32_t SinusValues[128] ={
    577U, 644U, 714U, 788U, 865U, 944U, 1026U, 1111U, 1198U, 1287U,
    1378U, 1471U, 1565U, 1660U, 1756U, 1853U, 1950U, 2047
 };
-uint8_t Screen_Refresh = 1;
-uint8_t Screen_Init = 1;
+SemaphoreHandle_t xSemaphore_CalcIsBusy = NULL;
+SemaphoreHandle_t xSemaphore_DisplayInit = NULL;
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/

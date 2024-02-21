@@ -713,15 +713,16 @@ void StartCalculationTask(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    HAL_UART_Transmit(&huart2, "Calc\r\n", 7, 1000);
-
     if(HAL_DMA_GetState(&hdma_adc1) == HAL_DMA_STATE_READY)
     {
       Measure_Calculate();
+      HAL_UART_Transmit(&huart2, "Calc refresh\r\n", 15, 1000);
 
-      Screen_Refresh = 1;
+      xSemaphoreGive(xSemaphore_CalcIsBusy);
+
       HAL_ADC_Start_DMA(&hadc1, Samples[0], AMOUNT_OF_ALL_SAMPLES);
     }
+
     vTaskDelay( 250 / portTICK_RATE_MS );
   }
 

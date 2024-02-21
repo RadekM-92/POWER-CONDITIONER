@@ -174,6 +174,12 @@ int main(void)
 
   /* USER CODE BEGIN RTOS_SEMAPHORES */
   /* add semaphores, ... */
+  xSemaphore_CalcIsBusy = xSemaphoreCreateBinary();
+  if (NULL == xSemaphore_CalcIsBusy) while(1);
+
+  xSemaphore_DisplayInit = xSemaphoreCreateBinary();
+  if (NULL == xSemaphore_DisplayInit) while(1);
+  xSemaphoreGive(xSemaphore_DisplayInit);
   /* USER CODE END RTOS_SEMAPHORES */
 
   /* USER CODE BEGIN RTOS_TIMERS */

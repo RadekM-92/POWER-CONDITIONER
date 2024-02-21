@@ -680,23 +680,19 @@ void StartDisplayTask(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    HAL_UART_Transmit(&huart2, "Display\r\n", 10, 1000);
-
-    if(1 == Screen_Init)
+    if (pdTRUE == xSemaphoreTake(xSemaphore_DisplayInit, 250 / portTICK_RATE_MS))
     {
       ScreenInit();
-      Screen_Init = 0;
+      HAL_UART_Transmit(&huart2, "Display init\r\n", 15, 1000);
     }
-    else
+
+    if(pdTRUE == xSemaphoreTake(xSemaphore_CalcIsBusy, 250 / portTICK_RATE_MS))//(1 == Screen_Refresh)
     {
-      if(1 == Screen_Refresh)
-      {
-        ScreenMeasureRefresh();
-        Screen_Refresh = 0;
-      }
+      ScreenMeasureRefresh();
+      HAL_UART_Transmit(&huart2, "Display refresh\r\n", 18, 1000);
     }
     
-    vTaskDelay( 500 / portTICK_RATE_MS );
+    vTaskDelay( 200 / portTICK_RATE_MS );
   }
 
   vTaskDelete(NULL);

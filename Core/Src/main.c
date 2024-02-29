@@ -745,6 +745,21 @@ void Error_Handler(void)
   /* USER CODE END Error_Handler_Debug */
 }
 
+/**
+  * @brief  DMA conversion complete callback
+  * @note   This function is executed when the transfer complete interrupt
+  *         is generated
+  * @retval None
+  */
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
+{
+  if (hadc1.DMA_Handle->Instance == hadc->DMA_Handle->Instance)
+  {
+    HAL_ADC_Stop_DMA(&hadc1);
+    // Run Calculation Task
+  }
+}
+
 #ifdef  USE_FULL_ASSERT
 /**
   * @brief  Reports the name of the source file and the source line number

@@ -49,7 +49,7 @@ uint32_t SinusValues[128] ={
    577U, 644U, 714U, 788U, 865U, 944U, 1026U, 1111U, 1198U, 1287U,
    1378U, 1471U, 1565U, 1660U, 1756U, 1853U, 1950U, 2047
 };
-SemaphoreHandle_t xSemaphore_CalcIsBusy = NULL;
+SemaphoreHandle_t xSemaphore_Calc = NULL;
 SemaphoreHandle_t xSemaphore_DisplayInit = NULL;
 /* USER CODE END PD */
 
@@ -174,8 +174,8 @@ int main(void)
 
   /* USER CODE BEGIN RTOS_SEMAPHORES */
   /* add semaphores, ... */
-  xSemaphore_CalcIsBusy = xSemaphoreCreateBinary();
-  if (NULL == xSemaphore_CalcIsBusy) while(1);
+  xSemaphore_Calc = xSemaphoreCreateBinary();
+  if (NULL == xSemaphore_Calc) while(1);
 
   xSemaphore_DisplayInit = xSemaphoreCreateBinary();
   if (NULL == xSemaphore_DisplayInit) while(1);
@@ -682,19 +682,19 @@ void StartDisplayTask(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    if (pdTRUE == xSemaphoreTake(xSemaphore_DisplayInit, 250 / portTICK_RATE_MS))
+    if (pdTRUE == xSemaphoreTake(xSemaphore_DisplayInit, 150 / portTICK_RATE_MS))
     {
       ScreenInit();
       HAL_UART_Transmit(&huart2, "Display init\r\n", 15, 1000);
     }
 
-    if(pdTRUE == xSemaphoreTake(xSemaphore_CalcIsBusy, 250 / portTICK_RATE_MS))//(1 == Screen_Refresh)
+    if(pdTRUE == xSemaphoreTake(xSemaphore_Calc, 150 / portTICK_RATE_MS))
     {
       ScreenMeasureRefresh();
       HAL_UART_Transmit(&huart2, "Display refresh\r\n", 18, 1000);
     }
     
-    vTaskDelay( 200 / portTICK_RATE_MS );
+    vTaskDelay( 100 / portTICK_RATE_MS );
   }
 
   vTaskDelete(NULL);
@@ -720,12 +720,11 @@ void StartCalculationTask(void *argument)
       Measure_Calculate();
       HAL_UART_Transmit(&huart2, "Calc refresh\r\n", 15, 1000);
 
-      xSemaphoreGive(xSemaphore_CalcIsBusy);
+      xSemaphoreGive(xSemaphore_Calc);
 
       HAL_ADC_Start_DMA(&hadc1, Samples[0], AMOUNT_OF_ALL_SAMPLES);
-    }
-
-    vTaskDelay( 250 / portTICK_RATE_MS );
+      vTaskSuspend(NULL);
+    }  
   }
 
   vTaskDelete(NULL);

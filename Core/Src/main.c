@@ -208,6 +208,8 @@ int main(void)
   /* add events, ... */
   /* USER CODE END RTOS_EVENTS */
 
+  vTaskSuspend(CalculationTaskHandle);
+
   /* Start scheduler */
   osKernelStart();
 
@@ -756,7 +758,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
   if (hadc1.DMA_Handle->Instance == hadc->DMA_Handle->Instance)
   {
     HAL_ADC_Stop_DMA(&hadc1);
-    // Run Calculation Task
+    xTaskResumeFromISR(CalculationTaskHandle);
   }
 }
 

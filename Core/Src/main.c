@@ -716,7 +716,7 @@ void StartDisplayTask(void *argument)
 void StartCalculationTask(void *argument)
 {
   /* USER CODE BEGIN 5 */
-
+  Measure_Message_t Measure_Message_Send;
   /* Infinite loop */
   for(;;)
   {
@@ -724,6 +724,14 @@ void StartCalculationTask(void *argument)
     {
       Measure_Calculate();
       HAL_UART_Transmit(&huart2, "Calc refresh\r\n", 15, 1000);
+      
+      Measure_Message_Send.ID = 1U;
+      Measure_Message_Send.Measure_Watch_List = Measure_Watch_list;
+
+      if (NULL != xQueueMeasureWatchList)
+      {
+        xQueueSend(xQueueMeasureWatchList, &Measure_Message_Send, 100 / portTICK_RATE_MS);
+      }
 
       xSemaphoreGive(xSemaphore_Calc);
 

@@ -16,6 +16,11 @@ typedef struct{
     float Ipp;
 }Measure_Watch_List_t;
 
+typedef struct {
+  uint8_t ID;
+  Measure_Watch_List_t Measure_Watch_List;
+} Measure_Message_t;
+
 extern Sample_t Samples[SAMPLES_AMOUNT_PER_ONE_PERIOD * AMOUNT_OF_PERIODS][AMOUNT_OF_MEASUREMENT_CHANNELS];
 extern Measure_Watch_List_t Measure_Watch_list;
 

@@ -29,10 +29,7 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-const typedef struct {
-  uint8_t ID;
-  Measure_Watch_List_t Measure_Watch_List;
-} Measure_Message_t;
+
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/

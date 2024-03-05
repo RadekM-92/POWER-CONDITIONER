@@ -690,6 +690,7 @@ void StartDisplayTask(void *argument)
     if (NULL != xQueueMeasureWatchList)
     {
       xQueueReceive(xQueueMeasureWatchList, &Measure_Message_Receive, 100 / portTICK_RATE_MS);
+      ScreenMeasureRefresh(Measure_Message_Receive);
     }
 
     if (pdTRUE == xSemaphoreTake(xSemaphore_DisplayInit, 150 / portTICK_RATE_MS))

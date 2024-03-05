@@ -259,9 +259,9 @@ void ST7735_DrawImage(uint16_t x, uint16_t y, uint16_t w, uint16_t h, const uint
 void ST7735_InvertColors(bool invert);
 void ST7735_SetGamma(GammaDef gamma);
 
-void ST7735_ftoa(uint8_t decimal, uint8_t precision, const float *src, char *des, uint8_t size);
+void ST7735_ftoa(uint8_t decimal, uint8_t precision, const float src, char *des, uint8_t size);
 void ScreenInit(void);
-void ScreenMeasureRefresh(const Measure_Message_t *msg);
+void ScreenMeasureRefresh(const Measure_Message_t msg);
 
 #ifdef __cplusplus
 }

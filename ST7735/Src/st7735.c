@@ -319,7 +319,7 @@ void ST7735_SetGamma(GammaDef gamma)
 	ST7735_Unselect();
 }
 
-void ST7735_ftoa(uint8_t decimal, uint8_t precision, const float *src, char *des, uint8_t size)
+void ST7735_ftoa(uint8_t decimal, uint8_t precision, const float src, char *des, uint8_t size)
 {
   int32_t decimal_value;
   int32_t precision_value;
@@ -342,11 +342,11 @@ void ST7735_ftoa(uint8_t decimal, uint8_t precision, const float *src, char *des
     ++i;
   }
 
-  decimal_value = (int32_t) *src;
-  precision_value = (int32_t)(*src * (float)(precision_pow) - (float)decimal_value * (float)(precision_pow));
+  decimal_value = (int32_t) src;
+  precision_value = (int32_t)(src * (float)(precision_pow) - (float)decimal_value * (float)(precision_pow));
 
   if (decimal_value >= decimal_pow 
-      || 0.0f == *src)
+      || 0.0f == src)
   {
     memset(des, '0', size);
   }
@@ -367,29 +367,29 @@ void ScreenInit(void)
   ST7735_WriteString(0, 100, Line_Ipp, Font_11x18, ST7735_BLUE, ST7735_WHITE);
 }
 
-void ScreenMeasureRefresh(const Measure_Message_t *msg)
+void ScreenMeasureRefresh(const Measure_Message_t msg)
 {
-  if(1U == msg->ID)
+  if(1U == msg.ID)
   {
     char Measure[6]={0};
 
-    ST7735_ftoa(3U, 1U, &msg->Measure_Watch_List.Vrms, Measure, 6);
+    ST7735_ftoa(3U, 1U, msg.Measure_Watch_List.Vrms, Measure, 6);
     strncpy(Line_V_RMS + 7, Measure, 5);
     ST7735_WriteString(0, 20, Line_V_RMS, Font_11x18, ST7735_MAGENTA, ST7735_WHITE);
 
-    ST7735_ftoa(1U, 3U, &msg->Measure_Watch_List.Irms, Measure, 6);
+    ST7735_ftoa(1U, 3U, msg.Measure_Watch_List.Irms, Measure, 6);
     strncpy(Line_I_RMS + 7, Measure, 5);
     ST7735_WriteString(0, 40, Line_I_RMS, Font_11x18, ST7735_BLUE, ST7735_WHITE);
 
-    ST7735_ftoa(2U, 2U, &msg->Measure_Watch_List.FRQ, Measure, 6);
+    ST7735_ftoa(2U, 2U, msg.Measure_Watch_List.FRQ, Measure, 6);
     strncpy(Line_FRQ + 6, Measure, 5);
     ST7735_WriteString(0, 60, Line_FRQ, Font_11x18, ST7735_GREEN, ST7735_WHITE);
 
-    ST7735_ftoa(3U, 1U, &msg->Measure_Watch_List.Vpp, Measure, 6);
+    ST7735_ftoa(3U, 1U, msg.Measure_Watch_List.Vpp, Measure, 6);
     strncpy(Line_Vpp + 5, Measure, 5);
     ST7735_WriteString(0, 80, Line_Vpp, Font_11x18, ST7735_MAGENTA, ST7735_WHITE);
     
-    ST7735_ftoa(2U, 2U, &msg->Measure_Watch_List.Ipp, Measure, 6);
+    ST7735_ftoa(2U, 2U, msg.Measure_Watch_List.Ipp, Measure, 6);
     strncpy(Line_Ipp + 5, Measure, 5);
     ST7735_WriteString(0, 100, Line_Ipp, Font_11x18, ST7735_BLUE, ST7735_WHITE);
   }

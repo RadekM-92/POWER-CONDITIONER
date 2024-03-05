@@ -683,10 +683,15 @@ void StartDefaultTask(void *argument)
 void StartDisplayTask(void *argument)
 {
   /* USER CODE BEGIN 5 */
-
+  Measure_Message_t Measure_Message_Receive;
   /* Infinite loop */
   for(;;)
   {
+    if (NULL != xQueueMeasureWatchList)
+    {
+      xQueueReceive(xQueueMeasureWatchList, &Measure_Message_Receive, 100 / portTICK_RATE_MS);
+    }
+
     if (pdTRUE == xSemaphoreTake(xSemaphore_DisplayInit, 150 / portTICK_RATE_MS))
     {
       ScreenInit();

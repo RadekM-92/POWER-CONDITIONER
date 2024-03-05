@@ -29,7 +29,10 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-
+const typedef struct {
+  uint8_t ID;
+  Measure_Watch_List_t Measure_Watch_List;
+} Measure_Message_t;
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -96,7 +99,7 @@ const osThreadAttr_t CalculationTask_attributes = {
   .priority = (osPriority_t) osPriorityHigh,
 };
 /* USER CODE BEGIN PV */
-
+QueueHandle_t xQueueMeasureWatchList;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -188,6 +191,11 @@ int main(void)
 
   /* USER CODE BEGIN RTOS_QUEUES */
   /* add queues, ... */
+  xQueueMeasureWatchList = xQueueCreate(5U, sizeof(Measure_Message_t));
+  if(NULL == xQueueMeasureWatchList)
+  {
+    Error_Handler();
+  }
   /* USER CODE END RTOS_QUEUES */
 
   /* Create the thread(s) */

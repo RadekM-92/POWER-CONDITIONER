@@ -684,17 +684,19 @@ void StartDisplayTask(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    if (NULL != xQueueMeasureWatchList)
-    {
-      xQueueReceive(xQueueMeasureWatchList, &Measure_Message_Receive, 100 / portTICK_RATE_MS);
-      ScreenMeasureRefresh(Measure_Message_Receive);
-      HAL_UART_Transmit(&huart2, "Display refresh\r\n", 18, 1000);
-    }
-
     if (pdTRUE == xSemaphoreTake(xSemaphore_DisplayInit, 150 / portTICK_RATE_MS))
     {
       ScreenInit();
       HAL_UART_Transmit(&huart2, "Display init\r\n", 15, 1000);
+    }
+    else
+    {
+      if (NULL != xQueueMeasureWatchList)
+        {
+          xQueueReceive(xQueueMeasureWatchList, &Measure_Message_Receive, 100 / portTICK_RATE_MS);
+          ScreenMeasureRefresh(Measure_Message_Receive);
+          HAL_UART_Transmit(&huart2, "Display refresh\r\n", 18, 1000);
+        }
     }
     
     vTaskDelay( 100 / portTICK_RATE_MS );
